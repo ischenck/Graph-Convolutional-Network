@@ -33,9 +33,8 @@ def normalize(mx: 'scipy.sparse.csr_matrix') -> 'scipy.sparse.csr_matrix':
     Returns:
         normalized matrix
     """
-    print(mx.shape)
     rowsum = np.array(mx.sum(1))
-    r_inv = np.power(rowsum, -1).flatten()
+    r_inv = np.power(rowsum, -1, where=rowsum!=0).flatten()
     r_inv[np.isinf(r_inv)] = 0.0
     return sp.diags(r_inv).dot(mx)
 
@@ -94,6 +93,7 @@ def load_data(directory: str,
             print('Adding test data for citeseer unlabeled test nodes')
         index_range = range(index_sorted[0], index_sorted[-1] + 1)
         tx_extended = sp.lil_matrix((len(index_range), x.shape[1]))
+        tx_extended[index_sorted - index_sorted[0], :] = tx
         tx = tx_extended 
         ty_extended = np.zeros((len(index_range), y.shape[1]))
         ty_extended[index_sorted - index_sorted[0], :] = ty 
