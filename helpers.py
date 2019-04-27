@@ -127,7 +127,6 @@ def load_data(directory: str,
         index_range = range(allx.shape[0], len(graph))
         isolated_node_idx = np.setdiff1d(index_range, index)
         tx_extended = sp.lil_matrix((len(index_range), x.shape[1]))
-        #tx_extended[index_sorted - allx.shape[0], :] = tx
         tx_extended[index_sorted - index_sorted[0], :] = tx
         tx = tx_extended
         ty_extended = np.zeros((len(index_range), y.shape[1]))
@@ -136,8 +135,6 @@ def load_data(directory: str,
 
         features = sp.vstack((allx, tx)).tolil()
         features[index, :] = features[index_sorted, :]
-
-        #idx_all = np.setdiff1d(range(len(graph)), isolated_node_idx)
 
         features_file = dataset + ".features.npz"
         features_path = pathlib.Path("data", features_file)
