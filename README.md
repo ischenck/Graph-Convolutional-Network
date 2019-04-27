@@ -16,6 +16,7 @@ The following commands assume you have [Anaconda](https://www.anaconda.com/) (or
 We have provided an ```environment.yml``` file with all required dependencies defined. To create the environment, run:
 
 ```bash
+conda update --all # Make sure anaconda is up-to-date
 conda env create -f environment.yml # this should be run only once
 conda activate gcn551 # this must be done in every new shell
 ```
