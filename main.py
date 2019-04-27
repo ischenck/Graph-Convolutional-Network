@@ -27,7 +27,7 @@ def run_with_dataset(directory: Union[str, 'pathlib.Path'],
         verbose: If True, prints messages during training time. \
             Defaults to true
     """
-    gcn = GCN(*load_data(directory, 'cora'))
+    gcn = GCN(*load_data(directory, dataset))
     gcn.train(hidden=hidden, 
               dropout=dropout, 
               learning_rate=learning_rate, 
