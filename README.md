@@ -3,6 +3,12 @@ Implements [GCN]() for [CORA](https://relational.fit.cvut.cz/dataset/CORA) [Cite
 
 Implementation is directly inspired by [Kipf's pytorch implemetnation](https://github.com/tkipf/pygcn). 
 
+## Authors
+
+- [Jared Coleman](https://jaredraycoleman.com)
+- [Tainã Coleman](https://www.linkedin.com/in/tainacoleman/)
+- [Ian Schenck](https://github.com/ischenck)
+
 ## Usage
 The following commands assume you have [Anaconda](https://www.anaconda.com/) (or miniconda) installed on your system.
 
