@@ -1,4 +1,6 @@
 name: gcn551
+channels:
+  - pytorch
 dependencies:
   - python==3.7
   - numpy~=1.16
