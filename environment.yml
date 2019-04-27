@@ -1,0 +1,7 @@
+name: gcn551
+dependencies:
+  - python==3.6
+  - numpy
+  - torch
+  - scipy
+  - networkx
