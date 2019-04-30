@@ -38,6 +38,16 @@ def normalize(mx: 'scipy.sparse.csr_matrix') -> 'scipy.sparse.csr_matrix':
     r_inv[np.isinf(r_inv)] = 0.0
     return sp.diags(r_inv).dot(mx)
 
+def normalize_adj(adj: 'scipy.sparse.csr_matrix') -> 'scipy.sparse.csr_matrix':
+    """ symmetrically normalize adjacency matrix
+
+    """
+    rowsum = np.array(adj.sum(1))
+    d_inv_sqrt = np.power(rowsum, -0.5).flatten()
+    d_inv_sqrt[np.isinf(d_inv_sqrt)] = 0
+    d_mat_inv_sqrt = sp.diags(d_inv_sqrt)
+    return d_mat_inv_sqrt * adj * d_mat_inv_sqrt
+
 def sparse_mx_to_torch(sparse_mx: 'scipy.sparse.csr_matrix') -> 'torch.Tensor':
     """Converts a Sparse Scipy Matrix to a Torch Tensor
 
@@ -171,7 +181,7 @@ def load_data(directory: str,
     adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph)).tocoo()
     # Make the directed graph undirected
     adj += adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
-    adj = normalize(adj + sp.eye(adj.shape[0]))
+    adj = normalize_adj(adj + sp.eye(adj.shape[0]))
     adj = sparse_mx_to_torch(adj)
 
     index_train = torch.LongTensor(range(len(y)))

@@ -127,11 +127,24 @@ class GCNModel(Module):
         """
         for i in range(self.nlayers):
             layer = self[i]
+            """
+            if i == 0:
+                x = F.relu(layer(x, adj))
+                x = F.dropout(x, self.dropout, training=self.training)
+            elif i < self.nlayers - 1:
+                x = F.relu(layer(x, adj))
+            else:
+                x = layer(x, adj)
+                x = F.dropout(x, self.dropout, training=self.training)
+            """
             if i < self.nlayers - 1:
                 x = F.relu(layer(x, adj))
                 x = F.dropout(x, self.dropout, training=self.training)  
+
             else: # No ReLU/Dropout for last layer
-                x = layer(x, adj) 
+                x = layer(x, adj)
+            
+            
         return F.log_softmax(x, dim=1)
 
 class GCN:
