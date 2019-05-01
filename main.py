@@ -8,10 +8,10 @@ import sys
 
 def run_with_dataset(directory: Union[str, 'pathlib.Path'], 
                      dataset: str, 
-                     hidden: List[int] = [16], 
-                     dropout: float = 0.5, 
-                     learning_rate: float = 0.01, 
-                     weight_decay: float = 5e-4,
+                     hidden: List[int] = [91], 
+                     dropout: float = 0.6449297033170698, 
+                     learning_rate: float = 0.011888866964052763, 
+                     weight_decay: float = 0.0005959130002875904,
                      epochs: int = 200,
                      verbose: bool = True) -> None:
     """Runs training with a given dataset
